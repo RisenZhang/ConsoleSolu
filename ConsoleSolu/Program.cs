@@ -21,6 +21,7 @@ namespace ConsoleSolu
             Console.WriteLine("1.Input Name   2.BMI           3.f(x)");
             Console.WriteLine("4.find Max     5.practice1005  6.test1013");
             Console.WriteLine("7.test1020     8.test1027      9.practice1027");
+            Console.WriteLine("10.practice1103");
 
             Console.Write("Option: ");
             string ans = "";
@@ -45,6 +46,8 @@ namespace ConsoleSolu
                         test1027();
                     else if (ans == "9")
                         practice1027();
+                    else if (ans == "10")
+                        practice1102();
 
         }
         static void findMax()
@@ -665,8 +668,346 @@ namespace ConsoleSolu
             return num;
         }
 
-        
+        static void practice1102()
+        {
+            string opt = "";
+            Console.Clear();
+            Console.WriteLine("1.乘法表                     2.小於 N 的質數  3.所有3,5,7的倍數");
+            Console.WriteLine("4.找出Long Integer的最大數   5.計算階層       6.最大公因數與最小公倍數");
+            Console.WriteLine("7.呼叫myClass                8.所得淨額, 計算其應繳納稅額");
+            Console.Write("選擇:");
+            opt = Console.ReadLine();
 
+            string input1 = "";
+            int mutitable = 0;
+            int prime = 0;
+            int remainder = 0;
+            int num = 0;
+            string input2 = "";
+            int num1 = 0;
+            int num2 = 0;
+            string myclass = "";
+            string input3 = "";
+
+            switch (opt)
+            {
+                case "1":
+                    Console.Write("請輸入N值:");
+                    input1 = Console.ReadLine();
+
+                    mutitable = judgeN(input1);
+
+                    int sum =0;
+
+                    for (int i = 1; i <= mutitable; i++)
+                    {
+                        for (int j = 1; j <= mutitable; j++)
+                        {
+                            sum = j*i;
+                            //Console.Write(i.ToString() + "*" + j.ToString() + "=" + sum.ToString() + "\t");
+                            Console.Write("{0}*{1}={2} \t",i,j,sum);
+                        }
+                        Console.Write("\n");
+                    }
+                    Console.ReadKey();
+                    break;
+                case "2":
+                    Console.Write("請輸入N值:");
+                    input1 = Console.ReadLine();
+
+                    prime = judgeN(input1);
+
+                    int pi = 0;
+                    int pj = 0;
+
+                    for (pi = 2; pi <= prime; pi++)
+                    {
+                        for (pj = 2; pj < pi; pj++)
+                        {
+                            if (pi % pj == 0) //有其它數j可以整除i 代表此數字不是質數
+                            {
+                                break; //跳出迴圈換下一個J計算
+                            }
+                        }//end of for
+                        if (pi == pj)
+                        {
+                            Console.Write("{0} \t", pi);
+                        }
+                    }
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    Console.Write("請輸入N值:");
+                    input1 = Console.ReadLine();
+
+                    remainder = judgeN(input1);
+
+                    string n3 = "";
+                    string n5 = "";
+                    string n7 = "";
+                    int count = 1;
+
+                    while (count <= remainder)
+                    {
+                        if (count % 3 == 0)
+                            n3 += count.ToString() + ",";
+                        if (count % 5 == 0)
+                            n5 += count.ToString() + ",";
+                        if (count % 7 == 0)
+                            n7 += count.ToString() + ",";
+
+                        count++;
+                    }
+                    Console.WriteLine("Multiples of 3:" + n3);
+                    Console.WriteLine("Multiples of 5:" + n5);
+                    Console.WriteLine("Multiples of 7:" + n7);
+                    Console.ReadKey();
+                    break;
+                case "4":
+                    long max = 0, min = 0;
+
+                    while (true)
+                    { 
+                        try
+                        {
+                             checked
+                             {
+                                 max = max + 1;
+                             }
+                        }
+                        catch (OverflowException ex)
+                        {
+                            Console.WriteLine(ex);
+                            break;
+                        }
+                    }
+
+                    while (true)
+                    {
+                        try
+                        {
+                            checked
+                            {
+                                min = min - 1;
+                            }
+                        }
+                        catch (OverflowException ex)
+                        {
+                            Console.WriteLine(ex);
+                            break;
+                        }
+                    }
+                    Console.WriteLine("最大臨界:{0}", max);
+                    Console.WriteLine("最小臨界:{0}", min);
+                    Console.ReadKey();
+                    break;
+                case "5":
+                    Console.Write("請輸入N值:");
+                    input1 = Console.ReadLine();
+
+                    num = judgeN(input1);
+                    int answer = factorial(num);
+
+                    Console.WriteLine("{0}!={1}", num, answer);
+                    Console.ReadKey();
+                    break;
+                case "6":
+                    Console.Write("請輸入N1值:");
+                    input1 = Console.ReadLine();
+
+                    Console.Write("請輸入N2值:");
+                    input2 = Console.ReadLine();
+
+                    num1 = judgeN(input1);
+                    num2 = judgeN(input2);
+
+                    int ori1 = num1;
+                    int ori2 = num2;
+
+                    for (int mod = num1 % num2; mod != 0; )
+                    {
+                        //(a,b)=(b,r)
+                        num1 = num2;
+                        num2 = mod;
+                        mod = num1 % num2;
+                    }
+
+                    int gcd = num2;
+                    int lcm = (ori1 * ori2) / gcd;
+                    Console.WriteLine("最大公因數:{0}",gcd);
+                    Console.WriteLine("最小公倍數:{0}",lcm);
+                    Console.ReadKey();
+                    break;
+                case "7":
+                    Console.WriteLine("使用myClass計進行計算 請選擇方法");
+                    Console.WriteLine("1.double計算BMI計算三數平均數 2.double計算圓形&矩形面積   3.印出字串三角形");
+                    Console.Write("選擇:");
+                    
+                    myclass = Console.ReadLine();
+                    myClass PracticeCls = new myClass();
+
+                    if (myclass == "1")
+                    {
+                        double bmi1 =0.0;
+                        double bmi2 =0.0;
+                        double bmi3 =0.0;
+                        int bmicount = 0;
+
+                        while(bmicount < 3)
+                        {
+                            Console.Write("請輸入身高(公尺):");
+                            input1 = Console.ReadLine();
+
+                            Console.Write("請輸入體重(公斤):");
+                            input2 = Console.ReadLine();
+
+                            double height = judgenum(input1);
+                            double weight = judgenum(input2);
+
+                            if (bmicount == 0)
+                            {
+                                bmi1 = PracticeCls.bmi(height, weight);
+                                Console.WriteLine("第1個人的BMI:{0}", bmi1);
+                            }
+                            else if (bmicount == 1)
+                            {
+                                bmi2 = PracticeCls.bmi(height, weight);
+                                Console.WriteLine("第2個人的BMI:{0}", bmi2);
+                            }
+                            else if (bmicount == 2)
+                            {
+                                bmi3 = PracticeCls.bmi(height, weight);
+                                Console.WriteLine("第3個人的BMI:{0}", bmi3);
+                            }
+                            bmicount++;
+                        }
+
+                        Console.WriteLine("三個人平均BMI:{0}", PracticeCls.average(Convert.ToInt32(bmi1), Convert.ToInt32(bmi2), Convert.ToInt32(bmi3)));
+                        Console.ReadKey();
+                        mainPic();
+                    }
+                    else if (myclass == "2")
+                    {
+                        Console.WriteLine("只能輸入整數, 整數外會提示錯誤");
+                        Console.Write("請輸入半徑:");
+                        input1 = Console.ReadLine();
+
+                        int radius = judgeN(input1);
+
+                        Console.Write("圓面積:{0}", PracticeCls.area(radius));
+
+                        Console.WriteLine("==============================");
+
+                        Console.WriteLine("只能輸入整數, 整數外會提示錯誤");
+                        Console.Write("請輸入矩形寬:");
+                        input1 = Console.ReadLine();
+
+                        Console.Write("請輸入矩形高:");
+                        input2 = Console.ReadLine();
+
+                        int width = judgeN(input1);
+                        int height = judgeN(input2);
+
+                        Console.WriteLine("矩形面積:{0}", PracticeCls.area(width, height));
+
+                        Console.ReadKey();
+                        mainPic();
+                    }
+                    else if (myclass == "3")
+                    {
+                        Console.Write("請輸入字串:");
+                        input1 = Console.ReadLine();
+                        PracticeCls.printTriange(input1);
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine("查無此選項");
+                        Console.ReadKey();
+                        mainPic();
+                    }
+                    break;
+                case "8":
+                    int income;
+                    double tax=0.0;
+                    Console.Write("Please input your income:");
+                    income = int.Parse(Console.ReadLine());
+
+                    if (income <= 520000)
+                    {
+                        tax = income * 0.05;
+                    }
+                    else if (income > 520000 & income <= 1170000)
+                    {
+                        tax = (income * 0.12) - 36400;
+                    }
+
+                    else if (income > 1170000 & income <= 2350000)
+                    {
+                        tax = (income * 0.2) - 130000;
+                    }
+
+                    else if (income > 2350000 & income <= 4400000)
+                    {
+                        tax = (income * 0.3) - 365000;
+                    }
+
+                    else if (income >= 4400001)
+                    {
+                        tax = (income * 0.4) - 805000;
+                    }
+                    Console.WriteLine("Your Payable Tax :" + tax.ToString());
+                    Console.ReadKey();
+                    mainPic();
+                    break;
+            }
+
+        }
+
+        static int factorial(int n)
+        {
+            if (n == 1)
+                return 1;
+            else
+                return n * factorial(n - 1);
+        }
+
+        static int judgeN(string num)
+        {
+            int N = 0;
+
+            try
+            {
+                N = int.Parse(num);
+            }
+            catch (OverflowException oex)
+            {
+                Console.WriteLine("請勿輸入超過2,147,483,647" + oex);
+                mainPic();
+            }
+            catch (FormatException fex)
+            {
+                try // 判斷是字串還是小數
+                {
+                    double checkmutitable = double.Parse(num);
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("請勿輸入字串" + ex);
+                    mainPic();
+                }
+                Console.WriteLine("請勿輸入小數" + fex);
+                mainPic();
+            }
+
+            if (N < 0)
+            {
+                Console.WriteLine("請勿輸入負整數");
+                mainPic();
+            }
+
+            return N;
+        }
 
     }
 }
